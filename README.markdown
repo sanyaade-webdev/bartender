@@ -2,6 +2,10 @@
 
 A Ruby client for [Open Beer Database](https://github.com/tristandunn/openbeerdatabase).
 
+## Example
+
+Check out [openbeerdatabase-bartender-example](https://github.com/tristandunn/openbeerdatabase-bartender-example) for an example.
+
 ## License
 
 The MIT License
