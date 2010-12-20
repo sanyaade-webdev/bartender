@@ -4,8 +4,7 @@ module Bartender
     # Retrieve all breweries.
     #
     # @param [Hash] options The options for the API request.
-    # @option options [String] :column   The column to sort by (defaults to +id+).
-    # @option options [String] :order    The order to sort by (defaults to +ASC+).
+    # @option options [String] :order    The order to sort by (defaults to +id ASC+).
     # @option options [String] :page     The page number to request (defautls to +1+).
     # @option options [String] :per_page The number of breweries to return per page (defaults to +50+).
     def self.all(options = {})
