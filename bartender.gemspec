@@ -11,14 +11,14 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = '>= 1.3.6'
   s.rubyforge_project         = 'bartender'
 
-  s.add_dependency 'yajl-ruby', '>= 0.7.8'
+  s.add_dependency 'yajl-ruby', '>= 0.8.1'
 
-  s.add_development_dependency 'bluecloth', '>= 2.0.9'
+  s.add_development_dependency 'bluecloth', '>= 2.0.11'
   s.add_development_dependency 'bourne',    '>= 1.0.0'
-  s.add_development_dependency 'bundler',   '>= 1.0.0'
+  s.add_development_dependency 'bundler',   '>= 1.0.10'
   s.add_development_dependency 'mocha',     '>= 0.9.8'
-  s.add_development_dependency 'rspec',     '>= 2.3.0'
-  s.add_development_dependency 'yard',      '>= 0.6.3'
+  s.add_development_dependency 'rspec',     '>= 2.5.0'
+  s.add_development_dependency 'yard',      '>= 0.6.4'
 
   s.files        = `git ls-files`.split("\n")
   s.require_path = 'lib'
