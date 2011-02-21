@@ -1,4 +1,5 @@
 require 'cgi'
+require 'net/http'
 
 module Bartender
   # @private
@@ -21,7 +22,9 @@ module Bartender
     end
 
     def self.hash_to_query_string(hash)
-      hash.delete_if { |key, value|
+      hash.sort_by { |key, value|
+        key.to_s
+      }.delete_if { |key, value|
         value.to_s.empty?
       }.collect { |key, value|
         "#{CGI.escape(key.to_s).gsub(/%(5B|5D)/n) { [$1].pack('H*') }}=#{CGI.escape(value.to_s)}"

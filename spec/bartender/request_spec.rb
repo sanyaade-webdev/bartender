@@ -49,11 +49,11 @@ describe Bartender::Request, '.uri' do
 
   it 'includes token when configured' do
     Bartender.configuration.token = 'a1b2c3'
-    Bartender::Request.uri('/path', { :a => 1, :b => 2 }).should == "/v#{version}/path.json?token=a1b2c3&a=1&b=2"
+    Bartender::Request.uri('/path', { :a => 1, :b => 2 }).should == "/v#{version}/path.json?a=1&b=2&token=a1b2c3"
   end
 
   it 'allows overriding of configured token' do
     Bartender.configuration.token = 'a1b2c3'
-    Bartender::Request.uri('/path', { :a => 1, :b => 2, :token => 3 }).should == "/v#{version}/path.json?token=3&a=1&b=2"
+    Bartender::Request.uri('/path', { :a => 1, :b => 2, :token => 3 }).should == "/v#{version}/path.json?a=1&b=2&token=3"
   end
 end
