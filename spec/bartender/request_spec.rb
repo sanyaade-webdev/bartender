@@ -7,6 +7,8 @@ describe Bartender::Request, '.get' do
   before do
     Bartender::Request.stubs(:uri).returns('/')
     Bartender::Request.stubs(:request).returns(request)
+
+    Bartender.configuration.public_token = nil
   end
 
   it 'constructs the request URI' do
@@ -21,6 +23,18 @@ describe Bartender::Request, '.get' do
 
   it 'returns the parsed JSON response body' do
     Bartender::Request.get('/').should == {}
+  end
+
+  it 'includes public token when configured' do
+    Bartender.configuration.public_token = 'a1b2c3'
+    Bartender::Request.get('/')
+    Bartender::Request.should have_received(:uri).with('/', :token => 'a1b2c3')
+  end
+
+  it 'allows overriding of configured public token' do
+    Bartender.configuration.public_token = 'x1y2z3'
+    Bartender::Request.get('/')
+    Bartender::Request.should have_received(:uri).with('/', :token => 'x1y2z3')
   end
 end
 
@@ -45,15 +59,5 @@ describe Bartender::Request, '.uri' do
 
   it 'returns a path and query string based on the provided options' do
     Bartender::Request.uri('/path', { :a => 1, :b => 2 }).should == "/v#{version}/path.json?a=1&b=2"
-  end
-
-  it 'includes token when configured' do
-    Bartender.configuration.token = 'a1b2c3'
-    Bartender::Request.uri('/path', { :a => 1, :b => 2 }).should == "/v#{version}/path.json?a=1&b=2&token=a1b2c3"
-  end
-
-  it 'allows overriding of configured token' do
-    Bartender.configuration.token = 'a1b2c3'
-    Bartender::Request.uri('/path', { :a => 1, :b => 2, :token => 3 }).should == "/v#{version}/path.json?a=1&b=2&token=3"
   end
 end

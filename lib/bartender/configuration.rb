@@ -7,8 +7,11 @@ module Bartender
     # @return [Fixnum] The port on which the Open Beer Database API runs (defaults to +80+).
     attr_accessor :port
 
-    # @return [String] The API token for your user.
-    attr_accessor :token
+    # @return [String] The public API token for your user.
+    attr_accessor :public_token
+
+    # @return [String] The private API token for your user.
+    attr_accessor :private_token
 
     # @return [Fixnum] The HTTP open timeout in seconds (defaults to +2+).
     attr_accessor :http_open_timeout

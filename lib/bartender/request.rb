@@ -5,6 +5,12 @@ module Bartender
   # @private
   class Request
     def self.get(path, options = {})
+      token = Bartender.configuration.public_token || options[:token]
+
+      unless token.nil?
+        options[:token] ||= token
+      end
+
       JSON.parse(request.get(uri(path, options)).body)
     end
 
@@ -16,8 +22,6 @@ module Bartender
     end
 
     def self.uri(path, options = {})
-      options[:token] ||= Bartender.configuration.token
-
       "/v#{API_VERSION}#{path}.json?#{hash_to_query_string(options)}"
     end
 
