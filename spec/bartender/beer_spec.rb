@@ -1,28 +1,28 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe Bartender::Beer, '.all' do
+describe Bartender::Beer, ".all" do
   before do
     Bartender::Request.stubs(:get)
   end
 
-  it 'retrieves all beers, without options' do
+  it "retrieves all beers, without options" do
     Bartender::Beer.all
-    Bartender::Request.should have_received(:get).with('/beers', {})
+    Bartender::Request.should have_received(:get).with("/beers", {})
   end
 
-  it 'retrieves all beers, with options' do
+  it "retrieves all beers, with options" do
     Bartender::Beer.all(:page => 2)
-    Bartender::Request.should have_received(:get).with('/beers', { :page => 2 })
+    Bartender::Request.should have_received(:get).with("/beers", { :page => 2 })
   end
 end
 
-describe Bartender::Beer, '.find' do
+describe Bartender::Beer, ".find" do
   before do
     Bartender::Request.stubs(:get)
   end
 
-  it 'retrieves a specific beer' do
+  it "retrieves a specific beer" do
     Bartender::Beer.find(1)
-    Bartender::Request.should have_received(:get).with('/beers/1')
+    Bartender::Request.should have_received(:get).with("/beers/1")
   end
 end

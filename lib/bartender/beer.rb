@@ -8,7 +8,7 @@ module Bartender
     # @option options [String] :page     The page number to request (defautls to +1+).
     # @option options [String] :per_page The number of beers to return per page (defaults to +50+).
     def self.all(options = {})
-      Bartender::Request.get('/beers', options)
+      Bartender::Request.get("/beers", options)
     end
 
     # Retrieve a specific beer.

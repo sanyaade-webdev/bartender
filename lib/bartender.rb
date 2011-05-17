@@ -1,11 +1,11 @@
-require 'yajl/json_gem'
+require "yajl/json_gem"
 
-require 'bartender/configuration'
-require 'bartender/request'
-require 'bartender/version'
+require "bartender/configuration"
+require "bartender/request"
+require "bartender/version"
 
-require 'bartender/beer'
-require 'bartender/brewery'
+require "bartender/beer"
+require "bartender/brewery"
 
 # Top-level interface to Bartender.
 module Bartender

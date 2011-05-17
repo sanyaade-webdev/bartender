@@ -21,7 +21,7 @@ module Bartender
 
     # Instantiated from {Bartender.configuration}. Sets defaults.
     def initialize
-      self.host              = 'api.openbeerdatabase.com'
+      self.host              = "api.openbeerdatabase.com"
       self.port              = 80
       self.http_open_timeout = 2
       self.http_read_timeout = 2
