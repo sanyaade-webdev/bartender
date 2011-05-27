@@ -5,7 +5,7 @@ module Bartender
   # @private
   class Request
     def self.get(path, options = {})
-      token = Bartender.configuration.public_token || options[:token]
+      token = Bartender.configuration.public_token
 
       unless token.nil?
         options[:token] ||= token
