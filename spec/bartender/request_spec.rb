@@ -38,7 +38,7 @@ end
 
 describe Bartender::Request, ".get" do
   let(:request)      { stub("Request",  :get  => response) }
-  let(:response)     { stub("Response", :body => "{}") }
+  let(:response)     { stub("Response", :body => "{}", :code => 200) }
   let(:public_token) { "a1b2c3" }
 
   before do
@@ -68,8 +68,13 @@ describe Bartender::Request, ".get" do
     request.should have_received(:get).with("/")
   end
 
-  it "returns the parsed JSON response body" do
+  it "returns the parsed JSON response body for a successful response" do
     Bartender::Request.get("/").should == {}
+  end
+
+  it "returns false for all other responses" do
+    response.stubs(:code => "401")
+    Bartender::Request.get("/").should == false
   end
 end
 

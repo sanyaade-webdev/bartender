@@ -18,7 +18,14 @@ module Bartender
         options[:token] ||= token
       end
 
-      JSON.parse(request.get(uri(path, options)).body)
+      response = request.get(uri(path, options))
+
+      case response.code.to_i
+      when 200
+        JSON.parse(response.body)
+      else
+        false
+      end
     end
 
     def self.post(path, attributes = {}, options = {})
