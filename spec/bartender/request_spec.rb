@@ -1,5 +1,41 @@
 require "spec_helper"
 
+describe Bartender::Request, ".delete" do
+  let(:request)       { stub("Request",  :delete => response) }
+  let(:response)      { stub("Response", :code => 200) }
+  let(:private_token) { "a1b2c3" }
+
+  before do
+    Bartender::Request.stubs(:uri).returns("/")
+    Bartender::Request.stubs(:request).returns(request)
+    Bartender.configuration.private_token = private_token
+  end
+
+  it "constructs the request URI" do
+    Bartender::Request.delete("/", :option => 1)
+    Bartender::Request.should have_received(:uri).with("/", :option => 1, :token => private_token)
+  end
+
+  it "allows overriding of configured private token" do
+    Bartender::Request.delete("/", :token => "x1y2z3")
+    Bartender::Request.should have_received(:uri).with("/", :token => "x1y2z3")
+  end
+
+  it "makes an API request" do
+    Bartender::Request.delete("/")
+    request.should have_received(:delete).with("/")
+  end
+
+  it "returns true for a successful response" do
+    Bartender::Request.delete("/").should == true
+  end
+
+  it "returns false for all other responses" do
+    response.stubs(:code => "401")
+    Bartender::Request.delete("/").should == false
+  end
+end
+
 describe Bartender::Request, ".get" do
   let(:request)      { stub("Request",  :get  => response) }
   let(:response)     { stub("Response", :body => "{}") }

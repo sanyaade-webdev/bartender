@@ -22,6 +22,16 @@ module Bartender
       Bartender::Request.post("/breweries", { :brewery => attributes }, options)
     end
 
+    # Deletes a brewery.
+    #
+    # @param [Integer] id The ID of the brewery to delete.
+    # @param [Hash] options The options for the API request.
+    # @option options [String] :token A private token to override the current configuration with (optional).
+    # @return [Boolean] +true+ if successful, +false+ otherwise.
+    def self.delete(id, options = {})
+      Bartender::Request.delete("/breweries/#{id}", options)
+    end
+
     # Retrieve a specific brewery.
     #
     # @param [Fixnum] id The ID of the brewery to retrieve.

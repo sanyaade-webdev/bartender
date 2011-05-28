@@ -4,6 +4,13 @@ require "net/http"
 module Bartender
   # @private
   class Request
+    def self.delete(path, options = {})
+      options[:token] ||= Bartender.configuration.private_token
+
+      response = request.delete(uri(path, options))
+      response.code.to_i == 200
+    end
+
     def self.get(path, options = {})
       token = Bartender.configuration.public_token
 

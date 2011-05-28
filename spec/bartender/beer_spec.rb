@@ -30,6 +30,19 @@ describe Bartender::Beer, ".create" do
   end
 end
 
+describe Bartender::Beer, ".delete" do
+  let(:options) { { :token => "Fake" } }
+
+  before do
+    Bartender::Request.stubs(:delete)
+  end
+
+  it "creates a beer" do
+    Bartender::Beer.delete(1, options)
+    Bartender::Request.should have_received(:delete).with("/beers/1", options)
+  end
+end
+
 describe Bartender::Beer, ".find" do
   before do
     Bartender::Request.stubs(:get)
