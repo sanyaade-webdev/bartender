@@ -1,19 +1,30 @@
 require "spec_helper"
 
 describe Bartender::Request, ".get" do
-  let(:request)  { stub("Request",  :get  => response) }
-  let(:response) { stub("Response", :body => "{}") }
+  let(:request)      { stub("Request",  :get  => response) }
+  let(:response)     { stub("Response", :body => "{}") }
+  let(:public_token) { "a1b2c3" }
 
   before do
     Bartender::Request.stubs(:uri).returns("/")
     Bartender::Request.stubs(:request).returns(request)
-
-    Bartender.configuration.public_token = nil
   end
 
   it "constructs the request URI" do
-    Bartender::Request.get("/", {})
-    Bartender::Request.should have_received(:uri).with("/", {})
+    Bartender::Request.get("/", :option => 1)
+    Bartender::Request.should have_received(:uri).with("/", :option => 1)
+  end
+
+  it "includes public token when configured" do
+    Bartender.configuration.public_token = public_token
+    Bartender::Request.get("/")
+    Bartender::Request.should have_received(:uri).with("/", :token => public_token)
+  end
+
+  it "allows overriding of configured public token" do
+    Bartender.configuration.public_token = public_token
+    Bartender::Request.get("/", :token => "x1y2z3")
+    Bartender::Request.should have_received(:uri).with("/", :token => "x1y2z3")
   end
 
   it "makes an API request" do
@@ -24,17 +35,48 @@ describe Bartender::Request, ".get" do
   it "returns the parsed JSON response body" do
     Bartender::Request.get("/").should == {}
   end
+end
 
-  it "includes public token when configured" do
-    Bartender.configuration.public_token = "a1b2c3"
-    Bartender::Request.get("/")
-    Bartender::Request.should have_received(:uri).with("/", :token => "a1b2c3")
+describe Bartender::Request, ".post" do
+  let(:headers)       { { "Content-Type" => "application/json" } }
+  let(:request)       { stub("Request",  :post => response) }
+  let(:location)      { "/v1/records/1" }
+  let(:response)      { stub("Response", :code => 201, :[] => location) }
+  let(:private_token) { "a1b2c3" }
+
+  before do
+    Bartender::Request.stubs(:uri).returns("/")
+    Bartender::Request.stubs(:request).returns(request)
+    Bartender.configuration.private_token = private_token
   end
 
-  it "allows overriding of configured public token" do
-    Bartender.configuration.public_token = "x1y2z3"
-    Bartender::Request.get("/")
+  it "constructs the request URI" do
+    Bartender::Request.post("/", {}, :option => 1)
+    Bartender::Request.should have_received(:uri).with("/", :option => 1, :token => private_token)
+  end
+
+  it "allows overriding of configured private token" do
+    Bartender::Request.post("/", {}, :token => "x1y2z3")
     Bartender::Request.should have_received(:uri).with("/", :token => "x1y2z3")
+  end
+
+  it "makes an API request" do
+    Bartender::Request.post("/", :name => "Example")
+    request.should have_received(:post).with("/", { :name => "Example" }.to_json, headers)
+  end
+
+  it "returns the location header for a created response" do
+    Bartender::Request.post("/").should == location
+  end
+
+  it "returns an errors hash for a bad request response" do
+    response.stubs(:code => "400", :body => '{"errors":{}}')
+    Bartender::Request.post("/").should == {}
+  end
+
+  it "returns false for all other responses" do
+    response.stubs(:code => "401")
+    Bartender::Request.post("/").should == false
   end
 end
 

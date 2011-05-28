@@ -16,6 +16,20 @@ describe Bartender::Brewery, ".all" do
   end
 end
 
+describe Bartender::Brewery, ".create" do
+  let(:options)    { { :token => "Fake" } }
+  let(:attributes) { { :name  => "Awesome" } }
+
+  before do
+    Bartender::Request.stubs(:post)
+  end
+
+  it "creates a brewery" do
+    Bartender::Brewery.create(attributes, options)
+    Bartender::Request.should have_received(:post).with("/breweries", { :brewery => attributes }, options)
+  end
+end
+
 describe Bartender::Brewery, ".find" do
   before do
     Bartender::Request.stubs(:get)

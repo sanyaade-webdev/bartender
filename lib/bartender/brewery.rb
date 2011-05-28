@@ -12,6 +12,16 @@ module Bartender
       Bartender::Request.get("/breweries", options)
     end
 
+    # Create a brewery.
+    #
+    # @param [Hash] attributes The attributes for the brewery.
+    # @param [Hash] options The options for the API request.
+    # @option options [String] :token A private token to override the current configuration with.
+    # @return [String,Hash,false] The location of the new brewery if created, errors hash for validation errors, +false+ otherwise.
+    def self.create(attributes = {}, options = {})
+      Bartender::Request.post("/breweries", { :brewery => attributes }, options)
+    end
+
     # Retrieve a specific brewery.
     #
     # @param [Fixnum] id The ID of the brewery to retrieve.

@@ -14,6 +14,21 @@ module Bartender
       JSON.parse(request.get(uri(path, options)).body)
     end
 
+    def self.post(path, attributes = {}, options = {})
+      options[:token] ||= Bartender.configuration.private_token
+
+      response = request.post(uri(path, options), attributes.to_json, "Content-Type" => "application/json")
+
+      case response.code.to_i
+      when 201
+        response["Location"]
+      when 400
+        JSON.parse(response.body)["errors"]
+      else
+        false
+      end
+    end
+
     def self.request
       http = Net::HTTP.new(Bartender.configuration.host, Bartender.configuration.port)
       http.open_timeout = Bartender.configuration.http_open_timeout
