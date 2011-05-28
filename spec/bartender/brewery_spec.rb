@@ -5,12 +5,12 @@ describe Bartender::Brewery, ".all" do
     Bartender::Request.stubs(:get)
   end
 
-  it "retrieves all breweries, without options" do
+  it "retrieves all breweries" do
     Bartender::Brewery.all
     Bartender::Request.should have_received(:get).with("/breweries", {})
   end
 
-  it "retrieves all breweries, with options" do
+  it "retrieves all breweries with options" do
     Bartender::Brewery.all(:page => 2)
     Bartender::Request.should have_received(:get).with("/breweries", { :page => 2 })
   end
