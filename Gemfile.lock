@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bartender (0.2.0)
+    bartender (0.3.0)
       yajl-ruby (>= 0.8.2)
 
 GEM
