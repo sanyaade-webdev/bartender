@@ -23,6 +23,11 @@ describe Bartender::Brewery, ".find" do
 
   it "retrieves a specific brewery" do
     Bartender::Brewery.find(1)
-    Bartender::Request.should have_received(:get).with("/breweries/1")
+    Bartender::Request.should have_received(:get).with("/breweries/1", {})
+  end
+
+  it "retrieves a specific brewery with options" do
+    Bartender::Brewery.find(1, :token => "fake")
+    Bartender::Request.should have_received(:get).with("/breweries/1", :token => "fake")
   end
 end
