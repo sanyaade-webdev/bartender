@@ -10,7 +10,7 @@ require "bartender"
 puts Bartender::Beer.find(1).inspect
 ~~~
 
-Check out [openbeerdatabase-bartender-example](https://github.com/tristandunn/openbeerdatabase-bartender-example) for a more advanced example.
+Check out [bartender-example](https://github.com/tristandunn/bartender-example) for a more advanced example.
 
 ## License
 
