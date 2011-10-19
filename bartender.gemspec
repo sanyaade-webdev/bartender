@@ -12,12 +12,10 @@ Gem::Specification.new do |s|
   s.test_files   = Dir["spec/**/*"].to_a
   s.require_path = "lib"
 
-  s.add_dependency "yajl-ruby", ">= 0.8.2"
+  s.add_dependency "yajl-ruby", "1.0.0"
 
-  s.add_development_dependency "bluecloth", ">= 2.1.0"
-  s.add_development_dependency "bourne",    ">= 1.0.0"
-  s.add_development_dependency "bundler",   ">= 1.0.13"
-  s.add_development_dependency "mocha",     ">= 0.9.8"
-  s.add_development_dependency "rspec",     ">= 2.6.0"
-  s.add_development_dependency "yard",      ">= 0.6.8"
+  s.add_development_dependency "bourne",  ">= 1.0.0"
+  s.add_development_dependency "bundler", ">= 1.0.21"
+  s.add_development_dependency "rspec",   ">= 2.7.0"
+  s.add_development_dependency "yard",    ">= 0.7.3"
 end
