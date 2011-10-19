@@ -103,7 +103,7 @@ describe Bartender::Request, ".post" do
 
   it "makes an API request" do
     Bartender::Request.post("/", :name => "Example")
-    request.should have_received(:post).with("/", { :name => "Example" }.to_json, headers)
+    request.should have_received(:post).with("/", Yajl::Encoder.encode({ :name => "Example" }), headers)
   end
 
   it "returns the location header for a created response" do
