@@ -2,13 +2,18 @@ require "yajl"
 
 require "bartender/configuration"
 require "bartender/request"
-require "bartender/version"
 
 require "bartender/beer"
 require "bartender/brewery"
 
 # Top-level interface to Bartender.
 module Bartender
+  # Bartender version.
+  VERSION = "0.5.0"
+
+  # Version of the Open Beer Database API.
+  API_VERSION = "1"
+
   # Call this method to modify defaults in your initializers.
   #
   # @example
