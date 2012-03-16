@@ -30,6 +30,6 @@ PLATFORMS
 DEPENDENCIES
   bartender!
   bourne (= 1.1.1)
-  bundler (= 1.1.1)
+  bundler (>= 1.1.0)
   rspec (= 2.8.0)
   yard (= 0.7.5)
