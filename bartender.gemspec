@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "yajl-ruby", "1.1.0"
 
-  s.add_development_dependency "bourne",  "1.1.1"
+  s.add_development_dependency "bourne",  "1.1.2"
   s.add_development_dependency "bundler", ">= 1.1.0"
   s.add_development_dependency "rake",    "0.9.2.2"
   s.add_development_dependency "rspec",   "2.9.0"
