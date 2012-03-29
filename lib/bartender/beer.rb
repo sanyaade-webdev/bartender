@@ -7,6 +7,7 @@ module Bartender
     # @option options [String] :order    The order to sort by (defaults to +id ASC+).
     # @option options [String] :page     The page number to request (defautls to +1+).
     # @option options [String] :per_page The number of beers to return per page (defaults to +50+).
+    # @option options [String] :query    A string to search beer names with. (optional)
     # @option options [String] :token    A public token to override the current configuration with (optional).
     def self.all(options = {})
       Bartender::Request.get("/beers", options)
