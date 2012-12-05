@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bartender (0.5.0)
+    bartender (0.6.0)
       multi_json (= 1.4.0)
 
 GEM

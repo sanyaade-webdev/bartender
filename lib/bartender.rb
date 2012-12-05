@@ -9,7 +9,7 @@ require "bartender/brewery"
 # Top-level interface to Bartender.
 module Bartender
   # Bartender version.
-  VERSION = "0.5.0"
+  VERSION = "0.6.0"
 
   # Version of the Open Beer Database API.
   API_VERSION = "1"
