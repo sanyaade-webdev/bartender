@@ -1,4 +1,4 @@
-require "yajl"
+require "multi_json"
 
 require "bartender/configuration"
 require "bartender/request"

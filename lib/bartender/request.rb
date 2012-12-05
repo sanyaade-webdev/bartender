@@ -22,7 +22,7 @@ module Bartender
 
       case response.code.to_i
       when 200
-        Yajl::Parser.parse(response.body)
+        MultiJson.load(response.body)
       else
         false
       end
@@ -31,13 +31,13 @@ module Bartender
     def self.post(path, attributes = {}, options = {})
       options[:token] ||= Bartender.configuration.private_token
 
-      response = request.post(uri(path, options), Yajl::Encoder.encode(attributes), "Content-Type" => "application/json")
+      response = request.post(uri(path, options), MultiJson.dump(attributes), "Content-Type" => "application/json")
 
       case response.code.to_i
       when 201
         response["Location"]
       when 400
-        Yajl::Parser.parse(response.body)["errors"]
+        MultiJson.load(response.body)["errors"]
       else
         false
       end

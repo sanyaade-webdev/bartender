@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.test_files   = Dir["spec/**/*"].to_a
   s.require_path = "lib"
 
-  s.add_dependency "yajl-ruby", "1.1.0"
+  s.add_dependency "multi_json", "1.4.0"
 
   s.add_development_dependency "bourne",  "1.3.0"
   s.add_development_dependency "rake",    "10.0.2"
